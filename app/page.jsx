@@ -5,12 +5,10 @@ import { getAllRecipes } from "@/lib/dbQueries";
 export default async function Home() {
     const allRecipes = await getAllRecipes();
 
-    console.log(allRecipes);
-
     return (
         <main>
             <BannerSection />
-            <RecipeSection />
+            <RecipeSection allRecipes={allRecipes} />
         </main>
     );
 }

@@ -1,3 +1,4 @@
+import AuthProvider from "@/components/AuthProvider";
 import Navbar from "@/components/Navbar";
 import connectMongoDB from "@/lib/mongodb";
 import { Poppins } from "next/font/google";
@@ -29,8 +30,10 @@ export default async function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={poppins.className}>
-                <Navbar />
-                {children}
+                <AuthProvider>
+                    <Navbar />
+                    {children}
+                </AuthProvider>
             </body>
         </html>
     );

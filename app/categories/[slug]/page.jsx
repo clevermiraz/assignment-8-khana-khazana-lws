@@ -1,6 +1,7 @@
 import { getRecipesByCategory } from "@/lib/dbQueries";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function CategoriesPage({ params }) {
     const { slug } = params;
@@ -8,6 +9,10 @@ export default async function CategoriesPage({ params }) {
     const decodedSlug = decodeURIComponent(slug);
 
     const recipes = await getRecipesByCategory(decodedSlug);
+
+    if (!recipes) {
+        notFound();
+    }
 
     return (
         <main>
@@ -34,6 +39,12 @@ export default async function CategoriesPage({ params }) {
                                 </Link>
                             </div>
                         ))}
+
+                        {recipes.length === 0 && (
+                            <div className="flex items-center justify-center h-48 w-full">
+                                <h3 className="text-lg">No recipes found for this category!</h3>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

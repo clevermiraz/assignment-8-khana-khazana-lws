@@ -13,7 +13,7 @@ export default function Favourite({ recipeId }) {
 
     const handleFavourite = async () => {
         if (!auth) {
-            router.push("/login");
+            router.push(`/login/?origin=${recipeId}`);
             return;
         }
 
